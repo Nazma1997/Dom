@@ -20,14 +20,34 @@ background-color: black;
 input{
   padding: 10px 30px 10px 30px;
   font-weight: 800;
-  box-shadow: 0px 2px 3px 0px;
+  box-shadow: 0px 2px 3px 0px white;
+  /* outline: none; */
+  /* background-color: transparent;
+    border: 0px solid; */
  
 }
+input:focus{
+  outline: none;
+}
+button:focus{
+  outline: none;
+}
+
 #align{
   display: flex;
   align-items: center;
   position: relative;
   gap: 0.5rem;
+  justify-content: center;
+}
+#icon{
+  background-color: white;
+  padding: 9px;
+  margin-right: 0px;
+  box-shadow: 0px 2px 3px 0px white;
+}
+#output{
+  margin-left: -0.7rem;
 }
 .toast-message{
   position: fixed;
