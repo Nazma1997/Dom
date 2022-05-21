@@ -1,0 +1,77 @@
+#background{
+  text-align: center;
+  margin-top: 300px;
+}
+button{
+padding: 10px 30px 10px 30px;
+color: black;
+font-weight: 800;
+margin-top: 5px;
+}
+button:hover{
+background-color: brown;
+}
+h1{
+text-shadow: 1px 1px 2px pink;
+}
+body{
+background-color: black;
+}
+input{
+  padding: 10px 30px 10px 30px;
+  font-weight: 800;
+  box-shadow: 0px 2px 3px 0px;
+ 
+}
+#align{
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 0.5rem;
+}
+.toast-message{
+  position: fixed;
+  z-index: 999;
+  top: 2rem;
+  right: 2rem;
+  background-color: green;
+  color: black;
+  border: 1px solid white;
+  border-radius: 0.25rem;
+
+  padding: 1rem 2rem;
+  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.toast-message-slide-in{
+  animation: toast-animation-in 0.5s ease-in;
+}
+.toast-message-slide-out{
+  animation: toast-animation-out 0.5s ease-in;
+}
+
+
+
+@keyframes toast-animation-in{
+  from{
+    transform: translateX(200px);
+    opacity: 0;
+  }
+  to{
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-animation-out{
+     from{
+       transform: translateX(0);
+       opacity: 1;
+     }
+     to{
+       transform: translateX(200px);
+       opacity: 1;
+     }
+}
