@@ -55,6 +55,9 @@ button:focus{
 #output2{
   border: none;
 }
+.text-color{
+  color: white;
+}
 .toast-message{
   position: fixed;
   z-index: 999;
