@@ -8,14 +8,18 @@ window.onload = () => {
 function main(){
       const root = document.getElementById('root');
       const changeBtn = document.getElementById('changeBtn');
-      const output = document.getElementById('output')
+      const output = document.getElementById('output');
+      const output2 = document.getElementById('output2');
       const copyBtn = document.getElementById('copyBtn');
 
 
        changeBtn.addEventListener('click', function(){
-        const bgColor = randomHEXColor();
-        root.style.backgroundColor = bgColor;
-        output.value = bgColor.substring(1).toUpperCase();
+        const color = generateColorDecimal();
+        const hex = randomHEXColor(color);
+        const rgb = generateRGBColor(color);
+        root.style.backgroundColor = hex;
+        output.value = hex.substring(1).toUpperCase();
+        output2.value = rgb;
       });
 
       copyBtn.addEventListener('click', function(){
@@ -44,16 +48,33 @@ function main(){
       });
 }
 
-/**
- * Random color generator function 
- */
+function generateColorDecimal(){
+  const red = Math.floor(Math.random() * 225);
+  const green = Math.floor(Math.random() * 225);
+  const blue = Math.floor(Math.random() * 225);
 
-function randomHEXColor(){
-   const red = Math.floor(Math.random() * 225);
-   const green = Math.floor(Math.random() * 225);
-   const blue = Math.floor(Math.random() * 225);
+  return{
+    red,
+    green,
+    blue
+  }
+}
 
-   return`#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+function randomHEXColor({red, green, blue}){
+  
+  // const {red, green, blue} = generateColorDecimal();
+  const getTwoCode = (value) => {
+    const hex = value.toString(16);
+    return hex.length == 1 ? `0${hex}` : hex
+  }
+
+   return`#${getTwoCode(red)}${getTwoCode(green)}${getTwoCode(blue)}`;
+};
+
+function generateRGBColor({red, green, blue}){
+  // const {red, green, blue} = generateColorDecimal();
+
+  return `rgb(${red}, ${green}, ${blue})`
 }
 
 function generateToastMessage(msg){
