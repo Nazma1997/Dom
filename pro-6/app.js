@@ -15,11 +15,11 @@ function main(){
        changeBtn.addEventListener('click', function(){
         const bgColor = randomHEXColor();
         root.style.backgroundColor = bgColor;
-        output.value = `${bgColor}`;
+        output.value = bgColor.substring(1).toUpperCase();
       });
 
       copyBtn.addEventListener('click', function(){
-        navigator.clipboard.writeText(`#${output.value}`);
+        navigator.clipboard.writeText(`${output.value}`);
 
         if(div != null){
           div.remove();
@@ -27,7 +27,7 @@ function main(){
         }
         
         if(isValidHex(output.value)){
-          generateToastMessage(`#${output.value} copied`);
+          generateToastMessage(`#${output.value} copied`.toUpperCase());
         } else{
           alert('Invalid Color')
         }
@@ -35,9 +35,12 @@ function main(){
 
       output.addEventListener('keyup', function(e){
                 const color = e.target.value;
-                if(color && isValidHex(color)){
-                  root.style.backgroundColor = color;
-                }
+               if(color){
+                 output.value = color.toUpperCase();
+                 if(isValidHex(color)){
+                   root.style.backgroundColor = `#${color}`;
+                 }
+               }
       });
 }
 

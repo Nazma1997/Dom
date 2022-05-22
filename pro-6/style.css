@@ -31,6 +31,7 @@ input:focus{
 }
 button:focus{
   outline: none;
+  border: none;
 }
 
 #align{
@@ -48,6 +49,7 @@ button:focus{
 }
 #output{
   margin-left: -0.7rem;
+  border: none;
 }
 .toast-message{
   position: fixed;
