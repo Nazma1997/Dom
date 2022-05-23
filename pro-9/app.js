@@ -1,10 +1,19 @@
 
+// Global variables 
 let div = null;
 
+
+
+/**
+ * Colors Picker by js DOM
+ */
+// Onload Function 
 window.onload = () => {
   main();
 };
 
+
+// Main Function 
 function main(){
       const root = document.getElementById('root');
       const changeBtn = document.getElementById('changeBtn');
@@ -65,6 +74,42 @@ function main(){
       });
 }
 
+
+// Dom Function
+/**
+ * toast message
+ * @param {String} msg 
+ */ 
+function generateToastMessage(msg){
+  div = document.createElement('div');
+ div.innerText = msg;
+ div.className = 'toast-message toast-message-slide-in';
+
+ div.addEventListener('click', function(){
+   div.classList.remove('toast-message-slide-in');
+   div.classList.add('toast-message-slide-out');
+
+   div.addEventListener('animationend', function(){
+     div.remove();
+     div = null;
+   })
+ });
+
+
+ document.body.appendChild(div)
+};
+
+// Event handlers 
+
+
+
+// Utils Function 
+
+
+/**
+ * generate and returns an object of three decimal values
+ * @returns {object} generateColorDecimal()
+ */
 function generateColorDecimal(){
   const red = Math.floor(Math.random() * 225);
   const green = Math.floor(Math.random() * 225);
@@ -76,7 +121,11 @@ function generateColorDecimal(){
     blue
   }
 }
-
+/**
+ * convert hex code to rgb
+ * @param {hex} hex 
+ * @returns {String}
+ */
 function hexToRgb(hex){
   const red = parseInt(hex.slice(0, 2), 16);
   const green = parseInt(hex.slice(2, 4), 16);
@@ -85,6 +134,11 @@ function hexToRgb(hex){
   return `rgb(${red}, ${green}, ${blue})`;
 }
 
+/**
+ * generate random hex color code
+ * @param {object} color 
+ * @returns {String}
+ */
 function randomHEXColor({red, green, blue}){
   
   // const {red, green, blue} = generateColorDecimal();
@@ -96,37 +150,27 @@ function randomHEXColor({red, green, blue}){
    return`#${getTwoCode(red)}${getTwoCode(green)}${getTwoCode(blue)}`;
 };
 
+/**
+ * generate random rgb color code
+ * @param {object} color
+ * @returns {String}
+ * 
+ */
 function generateRGBColor({red, green, blue}){
   // const {red, green, blue} = generateColorDecimal();
 
   return `rgb(${red}, ${green}, ${blue})`
 }
 
-function generateToastMessage(msg){
-     div = document.createElement('div');
-    div.innerText = msg;
-    div.className = 'toast-message toast-message-slide-in';
 
-    div.addEventListener('click', function(){
-      div.classList.remove('toast-message-slide-in');
-      div.classList.add('toast-message-slide-out');
-
-      div.addEventListener('animationend', function(){
-        div.remove();
-        div = null;
-      })
-    });
-
-
-    document.body.appendChild(div)
-};
 
 /**
- * 
+ * validate hex color code
  * @param {string} color 
- * @returns 
+ * @returns {boolean}
  */
 function isValidHex(color){
          if(color.length != 6) return false;
          return /^[0-9A-Za-z]{6}$/i.test(color);
 }
+
