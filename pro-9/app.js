@@ -22,8 +22,11 @@ function main(){
       // const copyBtn = document.getElementById('copyBtn');
       // const copyBtn2 = document.getElementById('copyBtn2');
            const generateRandomColorBtn =document.getElementById('generate-random-color');
-
+          
+           const colorModeHexInp = document.getElementById('input-hex')
         generateRandomColorBtn.addEventListener('click',handleGenerateRandomColorBtn);
+          
+        colorModeHexInp.addEventListener('keyup', handleColorModeHexInp );
 
       // copyBtn.addEventListener('click', function(){
       //   navigator.clipboard.writeText(`${output.value}`);
@@ -55,16 +58,7 @@ function main(){
       //   }
       // });
 
-      // output.addEventListener('keyup', function(e){
-      //           const color = e.target.value;
-      //          if(color){
-      //            output.value = color.toUpperCase();
-      //            if(isValidHex(color)){
-      //              root.style.backgroundColor = `#${color}`;
-      //              output2.value = hexToRgb(color);
-      //            }
-      //          }
-      // });
+      // 
 }
 
 
@@ -98,12 +92,12 @@ function generateToastMessage(msg){
  */
 function updateColorCodeToDom(color){
 
-  const hexColor = `${randomHEXColor(color)}`;
+  const hexColor = randomHEXColor(color);
   const rgbColor = generateRGBColor(color);
 
-  document.getElementById('color-display').style.backgroundColor = hexColor;
-  document.getElementById('color-mode-hex').value = hexColor;
-  document.getElementById('color-mode-rgb').value = rgbColor;
+  document.getElementById('color-display').style.backgroundColor = `#${hexColor}`;
+  document.getElementById('input-hex').value = hexColor;
+  document.getElementById('input-rgb').value = rgbColor;
   document.getElementById('color-slider-red').value = color.red;
   document.getElementById('color-slider-green').value = color.green;
   document.getElementById('color-slider-blue').value = color.blue ;
@@ -122,6 +116,18 @@ function handleGenerateRandomColorBtn(){
   updateColorCodeToDom(color);
 
 }
+
+function handleColorModeHexInp(e){
+    const hexColor = e.target.value;
+     if(hexColor){
+      this.value = hexColor.toUpperCase();
+       if(isValidHex(hexColor)){
+          const color = hexToDecimalColors(hexColor);
+          updateColorCodeToDom(color)
+       }
+     }
+}
+
 
 
 // Utils Function 
@@ -172,7 +178,7 @@ function randomHEXColor({red, green, blue}){
     return hex.length == 1 ? `0${hex}` : hex
   }
 
-   return`#${getTwoCode(red)}${getTwoCode(green)}${getTwoCode(blue)}`;
+   return`${getTwoCode(red)}${getTwoCode(green)}${getTwoCode(blue)}`;
 };
 
 /**
